@@ -1,9 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function PaginationNumeric({pagination}) {
+  const navigate = useNavigate();
+
   const numberOfPages = [];
-  const handlePageValue = (page) => {
-    console.log(page)
+  const handlePage = (page) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set('page', page);
+    navigate(`/products?${searchParams.toString()}`);
   }
 
   for (let i = 1; i <= pagination?.totalPages; i++) {
@@ -12,7 +17,7 @@ function PaginationNumeric({pagination}) {
         <span
           // className={`inline-flex items-center justify-center rounded leading-5 px-3.5 py-2 mx-0.5 bg-${page===i ? 'blue-500' : 'white'} border border-slate-200 text-${page===i ? 'white' : 'blue-500'} cursor-pointer hover:bg-blue-500 border border-slate-200 text-slate-600 hover:text-white shadow-sm`}
           className={`inline-flex items-center justify-center rounded leading-5 px-3.5 py-2 mx-0.5 bg-blue-500 border border-slate-200 text-white cursor-pointer hover:bg-blue-500 border border-slate-200 text-slate-600 hover:text-white shadow-sm`}
-          onClick={() => handlePageValue(i)}>
+          onClick={() => handlePage(i)}>
           {i}
         </span>
       </li>

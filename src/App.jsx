@@ -28,9 +28,12 @@ function App() {
   useEffect(() => {
     // Accede y analiza los parámetros de la URL aquí, por ejemplo:
     const searchParams = new URLSearchParams(location.search);
-    const orderBy = searchParams.get('orderBy');
-    const order = searchParams.get('order');
-    getProducts(setList, setPagination, orderBy, order)
+    const paramsObject = {
+      orderBy : searchParams.get('orderBy'),
+      order : searchParams.get('order'),
+      page : parseInt(searchParams.get('page'))
+    } 
+    getProducts(setList, setPagination, paramsObject)
   }, [location.search]);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Products from './ProductsTableItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -8,9 +8,12 @@ function ProductsTable({list, pagination}) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleOrderByChange = (orderByValue) => {
+  const handleOrder = (orderByValue) => {
     const searchParams = new URLSearchParams(location.search);
-    const orderValue = searchParams.get('order') === 'asc' || !searchParams.has('order') ? 'desc' : 'asc';
+    searchParams.delete('page');
+    const orders = ['asc','desc'];
+    const currentOrder = searchParams.get('order')
+    const orderValue = orderByValue !== searchParams.get('orderBy') ? orders[0] : orders.filter((order) => order !== currentOrder)[0];
     searchParams.set('orderBy', orderByValue);
     searchParams.set('order', orderValue);
     navigate(`/products?${searchParams.toString()}`);
@@ -30,19 +33,19 @@ function ProductsTable({list, pagination}) {
             <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
               <tr>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                  <div className="font-semibold text-left" id="id" onClick={() => handleOrderByChange('id')}>Id</div>
+                  <div className="font-semibold text-left" id="id" onClick={() => handleOrder('id')}>Id</div>
                 </th>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                  <div className="font-semibold text-left" id="title" onClick={() => handleOrderByChange('title')}>Producto</div>
+                  <div className="font-semibold text-left" id="title" onClick={() => handleOrder('title')}>Producto</div>
                 </th>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                  <div className="font-semibold text-left" id="price" onClick={() => handleOrderByChange('price')}>Precio</div>
+                  <div className="font-semibold text-left" id="price" onClick={() => handleOrder('price')}>Precio</div>
                 </th>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                  <div className="font-semibold text-left" id="stock" onClick={() => handleOrderByChange('stock')}>Stock</div>
+                  <div className="font-semibold text-left" id="stock" onClick={() => handleOrder('stock')}>Stock</div>
                 </th>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                  <div className="font-semibold text-left" id="tax" onClick={() => handleOrderByChange('tax')}>Impuesto</div>
+                  <div className="font-semibold text-left" id="tax" onClick={() => handleOrder('tax')}>Impuesto</div>
                 </th>
               </tr>
             </thead>

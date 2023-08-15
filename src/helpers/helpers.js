@@ -1,5 +1,4 @@
-export const getProducts = (setList, setPagination, orderBy, order) => {
-  console.log(order)
+export const getProducts = (setList, setPagination, paramsObject) => {
     const endpoint = 'http://vps-123eb2fc.vps.ovh.net/graphql';
     const query = `
       query FetchProducts($tax_filter: [String!], $title_filter: String, $order_by: String, $order: String, $page: Int!, $per_page: Int!) {
@@ -43,9 +42,9 @@ export const getProducts = (setList, setPagination, orderBy, order) => {
     const variables = {
         // tax_filter: ["es_general_21", "es_reduced_10"],
         // title_filter: "fanta",
-        order_by: orderBy || "title",
-        order: order || "desc",
-        page: 1,
+        order_by: paramsObject.orderBy || "title",
+        order: paramsObject.order || "asc",
+        page: paramsObject.page || 1,
         per_page: 100,
     };
 

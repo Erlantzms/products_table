@@ -26,7 +26,6 @@ function App() {
   }, [location.pathname]); // triggered on route change
 
   useEffect(() => {
-    // Accede y analiza los parámetros de la URL aquí, por ejemplo:
     const searchParams = new URLSearchParams(location.search);
     const paramsObject = {
       orderBy : searchParams.get('orderBy'),

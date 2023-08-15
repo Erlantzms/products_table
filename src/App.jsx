@@ -17,7 +17,6 @@ function App() {
   const location = useLocation();
   const [list, setList] = useState([]);
   const [pagination, setPagination] = useState({});
-  const [page, setPage] = useState(1);
   
   useEffect(() => {
     document.querySelector('html').style.scrollBehavior = 'auto'
@@ -29,15 +28,16 @@ function App() {
   useEffect(() => {
     // Accede y analiza los parámetros de la URL aquí, por ejemplo:
     const searchParams = new URLSearchParams(location.search);
-    const orderByValue = searchParams.get('orderBy');
-    getProducts(setList, setPagination, page, orderByValue)
+    const orderBy = searchParams.get('orderBy');
+    const order = searchParams.get('order');
+    getProducts(setList, setPagination, orderBy, order)
   }, [location.search]);
 
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Products list={list} pagination={pagination} setPage={setPage} page={page}/>} />
-        <Route path="/products" element={<Products list={list} pagination={pagination} setPage={setPage} page={page}/>} />
+        <Route exact path="/" element={<Products list={list} pagination={pagination}/>} />
+        <Route path="/products" element={<Products list={list} pagination={pagination}/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

@@ -10,7 +10,9 @@ function ProductsTable({list, pagination}) {
 
   const handleOrderByChange = (orderByValue) => {
     const searchParams = new URLSearchParams(location.search);
+    const orderValue = searchParams.get('order') === 'asc' || !searchParams.has('order') ? 'desc' : 'asc';
     searchParams.set('orderBy', orderByValue);
+    searchParams.set('order', orderValue);
     navigate(`/products?${searchParams.toString()}`);
   };
 

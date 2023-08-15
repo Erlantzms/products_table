@@ -7,8 +7,7 @@ import FilterButton from '../components/DropdownFilter';
 import ProductsTable from '../partials/products/ProductsTable';
 import PaginationNumeric from '../components/PaginationNumeric';
 
-function Products() {
-
+function Products({list, pagination, setPage, page}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -45,11 +44,11 @@ function Products() {
             </div>
 
             {/* Table */}
-            <ProductsTable />
+            <ProductsTable list={list} pagination={pagination}/>
 
             {/* Pagination */}
             <div className="mt-8">
-              <PaginationNumeric />
+              <PaginationNumeric pagination={pagination} setPage={setPage} page={page} />
             </div>
 
           </div>

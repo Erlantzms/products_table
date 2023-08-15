@@ -38,7 +38,7 @@ function Products({list, pagination}) {
                 {/* Search form */}
                 <SearchForm placeholder="Search by Product ID…" />
                 {/* Filter button */}
-                <FilterButton align="right" />
+                <FilterButton align="right" list={list} />
               </div>
 
             </div>

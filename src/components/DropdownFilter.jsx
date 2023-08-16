@@ -75,6 +75,21 @@ function DropdownFilter({
       (searchParams.length) ? navigate(`/products?${newSearchParams.toString()}`) : navigate(`/products`);
   }
 
+  const defineTaxName = (tax) => {
+    switch (tax) {
+      case 'es_general_21':
+        return `ES ${t("tax.general")} 21%`
+      case 'es_reduced_10':
+        return `ES ${t("tax.reduced")} 10%`
+      case 'es_super-reduced_4':
+        return `ES ${t("tax.s_reduced")} 10%`
+      case 'fr_general_20':
+        return `FR ${t("tax.general")} 20%`
+      default:
+        return `FR ${t("tax.reduced")} 5.5%`
+    }
+  }
+
 
   return (
     <div className="relative inline-flex">
@@ -102,7 +117,8 @@ function DropdownFilter({
         leaveEnd="opacity-0"
       >
         <div ref={dropdown}>
-          <div className="text-xs font-semibold text-slate-400 uppercase pt-1.5 pb-2 px-4">{t("filters.title")}</div>
+          <div className="text-xs font-semibold text-slate-900 uppercase pt-1.5 pb-2 px-4">{t("filters.title")}</div>
+          <div className="text-xs text-slate-600 uppercase pt-1.5 pb-2 px-4 ml-4">{t("filters.subtitle")}</div>
           
           <form onSubmit={handleFilters}>
             <ul className="mb-4">
@@ -110,14 +126,14 @@ function DropdownFilter({
                 
                 filters.map(el => {
                   return (
-                    <li key={el} className="py-1 px-3">
+                    <li key={el} className="px-3">
                       <input
                         type="checkbox"
                         className="form-checkbox"
                         value={el}
                         checked={filtersApplied[el] || false}
                         onChange={handleCheckboxChange}/>
-                      <span className="text-sm font-medium ml-2">{el}</span>
+                      <span className="text-sm font-medium ml-2">{defineTaxName(el)}</span>
                     </li>
                   )
                 })

@@ -10,7 +10,7 @@ import './css/style.scss';
 // Import pages
 import Products from './pages/Products';
 import PageNotFound from './pages/utility/PageNotFound';
-import { getProducts } from './helpers/helpers';
+import { getProducts } from './queries/queries';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../src/i18n';
 

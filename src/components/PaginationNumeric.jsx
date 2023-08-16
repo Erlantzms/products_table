@@ -1,10 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function PaginationNumeric({pagination}) {
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
-
+  const {t} = useTranslation();
 
   const numberOfPages = [];
 
@@ -76,7 +77,7 @@ function PaginationNumeric({pagination}) {
       </div>
       <div className="flex justify-center">
         <div className="text-sm text-slate-500 text-center sm:text-left py-2">
-          <span className="font-medium text-slate-600">1</span> a <span className="font-medium text-slate-600">10</span> de <span className="font-medium text-slate-600">{pagination.totalResults}</span> resultados
+          <span className="font-medium text-slate-600">1</span> {t("paginator_footer_to")} <span className="font-medium text-slate-600">10</span> {t("paginator_footer_of")} <span className="font-medium text-slate-600">{pagination.totalResults}</span> {t("paginator_footer_res")}
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Sidebar({
   sidebarOpen,
@@ -11,6 +12,8 @@ function Sidebar({
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
+
+  const {t} = useTranslation();
 
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true');
@@ -109,12 +112,6 @@ function Sidebar({
         <div className="space-y-8">
           {/* Pages group */}
           <div>
-            <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3">
-              <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">
-                •••
-              </span>
-              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Pages</span>
-            </h3>
             <ul className="mt-3">
 
               {/* Products */}
@@ -127,7 +124,7 @@ function Sidebar({
                   }`}
                 >
                   <div className="flex items-center">
-                    <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                  <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
                     <path
                                 className={`fill-current text-slate-400 ${
                                   (pathname === '/' || pathname.includes('products')) && '!text-indigo-500'
@@ -144,7 +141,7 @@ function Sidebar({
                               />
                     </svg>
                     <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                      Catálogo
+                      {t("table_title")}
                     </span>
                   </div>
                 </NavLink>

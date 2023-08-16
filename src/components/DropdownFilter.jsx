@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Transition from '../utils/Transition';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'
 
 function DropdownFilter({
   align
@@ -17,6 +18,9 @@ function DropdownFilter({
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
+
+  const {t} = useTranslation();
+
 
   // close on click outside
   useEffect(() => {
@@ -98,7 +102,7 @@ function DropdownFilter({
         leaveEnd="opacity-0"
       >
         <div ref={dropdown}>
-          <div className="text-xs font-semibold text-slate-400 uppercase pt-1.5 pb-2 px-4">Filters</div>
+          <div className="text-xs font-semibold text-slate-400 uppercase pt-1.5 pb-2 px-4">{t("filters.title")}</div>
           
           <form onSubmit={handleFilters}>
             <ul className="mb-4">
@@ -126,7 +130,7 @@ function DropdownFilter({
                     className="btn-xs bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600"
                     onClick={handleClear}
                   >
-                    Clear
+                    {t("filters.clear")}
                   </button>
                 </li>
                 <li>
@@ -136,7 +140,7 @@ function DropdownFilter({
                     onClick={() => setDropdownOpen(false)}
                     onBlur={() => setDropdownOpen(false)}
                   >
-                    Apply
+                    {t("filters.apply")}
                   </button>
                 </li>
               </ul>

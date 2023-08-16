@@ -1,0 +1,19 @@
+{
+    "products": "Number of results: ",
+    "table_title": "List of products ",
+    "table_header": {
+        "id": "Id",
+        "product": "Product",
+        "price": "Price",
+        "stock": "Stock"
+    },
+    "input_placeholder": "Search by product...",
+    "filters": {
+        "title":"filters",
+        "apply":"Apply",
+        "clear":"Clear"
+    },
+    "paginator_footer_to": "to",
+    "paginator_footer_of": "of",
+    "paginator_footer_res": "results"
+}

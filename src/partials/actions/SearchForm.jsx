@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-function SearchForm({
-  placeholder
-}) {
+function SearchForm() {
   const [searchValue, setSearchValue] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
+
+  const {t} = useTranslation();
 
   const searchByParam = (event) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ function SearchForm({
         id="action-search" 
         className="form-input pl-9 focus:border-slate-300" 
         type="search" 
-        placeholder={placeholder}
+        placeholder={t("input_placeholder")}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />

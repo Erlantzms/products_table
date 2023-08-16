@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowDown from "../../icons/arrow-down.svg";
 import ArrowUp from "../../icons/arrow-up.svg";
 import Loader from '../../components/Loader';
+import { useTranslation } from 'react-i18next';
 
 function ProductsTable({list, pagination, isLoading}) {
   const location = useLocation();
@@ -13,6 +14,9 @@ function ProductsTable({list, pagination, isLoading}) {
   const orders = ['asc','desc'];
   const currentOrder = searchParams.get('order') || 'asc'
   const currentOrderBy = searchParams.get('orderBy') || 'title'
+
+  const {t} = useTranslation();
+
   const renderArrows = (id) => {
     if (currentOrderBy === id) {
       if (currentOrder === 'asc') {
@@ -38,10 +42,9 @@ function ProductsTable({list, pagination, isLoading}) {
   return (
     <div className="bg-white shadow-lg rounded-sm border border-slate-200 relative">
       <header className="px-5 py-4">
-        <h2 className="font-semibold text-slate-800">Productos <span className="text-slate-400 font-medium">{pagination.totalResults}</span></h2>
+        <h2 className="font-semibold text-slate-800">{t("products")} <span className="text-slate-400 font-medium">{pagination.totalResults}</span></h2>
       </header>
       <div>
-
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="table-auto w-full">
@@ -50,25 +53,25 @@ function ProductsTable({list, pagination, isLoading}) {
               <tr>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
                   <div id="id" onClick={() => handleOrder('id')} className="flex items-center">
-                    <span className="font-semibold text-left">Id</span>
+                    <span className="font-semibold text-left">{t("table_header.id")}</span>
                     {renderArrows('id')}
                   </div>
                 </th>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
                   <div className="flex items-center" id="title" onClick={() => handleOrder('title')}>
-                    <span className="font-semibold text-left">Producto</span>
+                    <span className="font-semibold text-left">{t("table_header.product")}</span>
                     {renderArrows('title')}
                   </div>
                 </th>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
                   <div className="flex items-center" id="price" onClick={() => handleOrder('price')}>
-                    <span className="font-semibold text-left">Precio</span>
+                    <span className="font-semibold text-left">{t("table_header.price")}</span>
                     {renderArrows('price')}
                 </div>
                 </th>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
                   <div className="flex items-center" id="stock" onClick={() => handleOrder('stock')}>
-                    <span className="font-semibold text-left">Stock</span>
+                    <span className="font-semibold text-left">{t("table_header.stock")}</span>
                     {renderArrows('stock')}
                 </div>
                 </th>

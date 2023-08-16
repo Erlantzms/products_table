@@ -1,22 +1,15 @@
 import React from 'react';
 
 function ProductsTableItem(props) {
-  const totalColor = (status) => {
-    switch (status) {
-      case 'Paid':
-        return 'text-emerald-500';
-      case 'Due':
-        return 'text-yellow-500';
-      case 'Overdue':
-        return 'text-rose-500';
-      default:
-        return 'text-slate-500';
-    }
-  };
 
   const warningStock = (stock) => {
-    if (stock <= 5) {
+    if (stock <= 1) {
         return 'bg-red-100 text-red-600';
+    }
+    else if (stock <= 5) {
+      return 'bg-amber-100 text-amber-600';
+    } else {
+      return 'bg-green-100 text-green-600';
     }
   };
 
@@ -37,7 +30,7 @@ function ProductsTableItem(props) {
 
 
   return (
-    <tr>
+    <tr className='hover:bg-gray-100'>
       <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <div className="font-medium text-sky-500">{props.id}</div>
       </td>
@@ -48,7 +41,7 @@ function ProductsTableItem(props) {
         <div className="font-medium text-slate-800">{props.price}</div>
       </td>
       <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <span className={`font-medium px-2 py-1 ${warningStock(props.stock)} rounded-full`}>{(props.stock)}</span>
+        <span className={`font-medium px-2 py-1 ${warningStock(props.stock)} flex w-8 justify-center rounded-lg`}>{(props.stock)}</span>
       </td>
       <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <span className={`font-medium px-2 py-1 rounded-full`}>{`${defineTax(props.tax)}%`}</span>

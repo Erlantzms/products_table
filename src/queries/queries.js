@@ -1,44 +1,44 @@
-export const getProducts = (setList, setPagination, paramsObject, setIsLoading) => {
-    const endpoint = 'http://vps-123eb2fc.vps.ovh.net/graphql';
-    const query = `
-      query FetchProducts($tax_filter: [String!], $title_filter: String, $order_by: String, $order: String, $page: Int!, $per_page: Int!) {
-        fetchProducts {
-          results(
-            taxFilter: $tax_filter,
-            titleFilter: $title_filter,
-            orderBy: $order_by,
-            order: $order,
-            page: $page,
-            perPage: $per_page
-          ) {
-            id
-            title
-            price
-            tax
-            stock
-          }
-          pagination(
-            taxFilter: $tax_filter,
-            titleFilter: $title_filter,
-            orderBy: $order_by,
-            order: $order,
-            page: $page,
-            perPage: $per_page
-          ) {
-            totalResults
-            limitValue
-            totalPages
-            currentPage
-            nextPage
-            prevPage
-            firstPage
-            lastPage
-            outOfRange
-          }
-        }
+const endpoint = 'http://vps-123eb2fc.vps.ovh.net/graphql';
+const query = `
+  query FetchProducts($tax_filter: [String!], $title_filter: String, $order_by: String, $order: String, $page: Int!, $per_page: Int!) {
+    fetchProducts {
+      results(
+        taxFilter: $tax_filter,
+        titleFilter: $title_filter,
+        orderBy: $order_by,
+        order: $order,
+        page: $page,
+        perPage: $per_page
+      ) {
+        id
+        title
+        price
+        tax
+        stock
       }
-    `;
+      pagination(
+        taxFilter: $tax_filter,
+        titleFilter: $title_filter,
+        orderBy: $order_by,
+        order: $order,
+        page: $page,
+        perPage: $per_page
+      ) {
+        totalResults
+        limitValue
+        totalPages
+        currentPage
+        nextPage
+        prevPage
+        firstPage
+        lastPage
+        outOfRange
+      }
+    }
+  }
+`;
 
+export const getProducts = (setList, setPagination, paramsObject, setIsLoading) => {
     const variables = {
         tax_filter: paramsObject.filters,
         title_filter: paramsObject.title,
@@ -67,5 +67,4 @@ export const getProducts = (setList, setPagination, paramsObject, setIsLoading) 
     .catch(error => {
       console.error('Error:', error);
     });
-
-  }
+};

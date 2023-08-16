@@ -30,7 +30,7 @@ function ProductsTableItem(props) {
 
 
   return (
-    <tr className='hover:bg-gray-100'>
+    <tr className='hover:bg-slate-100'>
       <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <div className="font-medium text-sky-500">{props.id}</div>
       </td>

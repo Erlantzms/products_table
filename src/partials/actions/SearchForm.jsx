@@ -13,8 +13,10 @@ function SearchForm() {
 
   const searchByParam = (event) => {
     event.preventDefault();
+    searchParams.delete('page');
     searchParams.set('title', searchValue);
     navigate(`/products?${searchParams.toString()}`);
+    setSearchValue('');
   } 
   return (
     <form className="relative" onSubmit={searchByParam}>

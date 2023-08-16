@@ -14,9 +14,9 @@
        "apply":"Aplicar",
        "clear":"Borrar"
     },
-    "paginator_footer_to": "a",
-    "paginator_footer_of": "de",
-    "paginator_footer_res": "resultados",
+    "paginator_footer_to": " a ",
+    "paginator_footer_of": " de ",
+    "paginator_footer_res": " resultados",
     "tax": {
         "general": "General",
         "reduced": "Reducido",

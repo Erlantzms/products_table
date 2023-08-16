@@ -1,4 +1,4 @@
-export const getProducts = (setList, setPagination, paramsObject) => {
+export const getProducts = (setList, setPagination, paramsObject, setIsLoading) => {
     const endpoint = 'http://vps-123eb2fc.vps.ovh.net/graphql';
     const query = `
       query FetchProducts($tax_filter: [String!], $title_filter: String, $order_by: String, $order: String, $page: Int!, $per_page: Int!) {
@@ -41,7 +41,7 @@ export const getProducts = (setList, setPagination, paramsObject) => {
 
     const variables = {
         tax_filter: paramsObject.filters,
-        // title_filter: "fanta",
+        title_filter: paramsObject.title,
         order_by: paramsObject.orderBy || "title",
         order: paramsObject.order || "asc",
         page: paramsObject.page || 1,
@@ -62,6 +62,7 @@ export const getProducts = (setList, setPagination, paramsObject) => {
     .then(data => {
       setList(data?.data?.fetchProducts?.results);
       setPagination(data?.data?.fetchProducts?.pagination);
+      setIsLoading(false)
     })
     .catch(error => {
       console.error('Error:', error);

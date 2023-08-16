@@ -13,10 +13,12 @@ import PageNotFound from './pages/utility/PageNotFound';
 import { getProducts } from './helpers/helpers';
 
 function App() {
-
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
   const [list, setList] = useState([]);
   const [pagination, setPagination] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
     document.querySelector('html').style.scrollBehavior = 'auto'
@@ -26,21 +28,21 @@ function App() {
   }, [location.pathname]); // triggered on route change
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
     const paramsObject = {
       orderBy : searchParams.get('orderBy'),
       order : searchParams.get('order'),
       page : parseInt(searchParams.get('page')),
-      filters : (searchParams.get('filters'))?.split(',') 
+      filters : (searchParams.get('filters'))?.split(','),
+      title : (searchParams.get('title'))
     } 
-    getProducts(setList, setPagination, paramsObject)
+    getProducts(setList, setPagination, paramsObject, setIsLoading)
   }, [location.search]);
 
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Products list={list} pagination={pagination}/>} />
-        <Route path="/products" element={<Products list={list} pagination={pagination}/>} />
+        <Route exact path="/" element={<Products list={list} pagination={pagination} isLoading={isLoading}/>} />
+        <Route path="/products" element={<Products list={list} pagination={pagination} isLoading={isLoading}/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

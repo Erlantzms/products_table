@@ -3,9 +3,9 @@ import Products from './ProductsTableItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowDown from "../../icons/arrow-down.svg";
 import ArrowUp from "../../icons/arrow-up.svg";
+import Loader from '../../components/Loader';
 
-function ProductsTable({list, pagination}) {
-
+function ProductsTable({list, pagination, isLoading}) {
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
@@ -82,7 +82,7 @@ function ProductsTable({list, pagination}) {
             </thead>
             {/* Table body */}
             <tbody className="text-sm divide-y divide-slate-200">
-              {
+              {!isLoading ?
                 list.map(product => {
                   return (
                     <Products
@@ -94,7 +94,12 @@ function ProductsTable({list, pagination}) {
                       tax={product.tax}
                     />
                   )
-                })
+                }) :
+              <tr >
+                <td colSpan="5" className='text-center'>
+                  <Loader/>
+                </td>
+              </tr>
               }
             </tbody>
           </table>

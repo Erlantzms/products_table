@@ -40,7 +40,7 @@ export const getProducts = (setList, setPagination, paramsObject) => {
     `;
 
     const variables = {
-        // tax_filter: ["es_general_21", "es_reduced_10"],
+        tax_filter: paramsObject.filters,
         // title_filter: "fanta",
         order_by: paramsObject.orderBy || "title",
         order: paramsObject.order || "asc",

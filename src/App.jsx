@@ -30,7 +30,8 @@ function App() {
     const paramsObject = {
       orderBy : searchParams.get('orderBy'),
       order : searchParams.get('order'),
-      page : parseInt(searchParams.get('page'))
+      page : parseInt(searchParams.get('page')),
+      filters : (searchParams.get('filters'))?.split(',') 
     } 
     getProducts(setList, setPagination, paramsObject)
   }, [location.search]);

@@ -1,15 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Transition from '../utils/Transition';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function DropdownFilter({
-  align,
-  list
+  align
 }) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const filters = ["es_general_21", "es_reduced_10", "es_super-reduced_4", "fr_general_20", "fr_reduced_5.5"]
+  const [filtersToApply, setFiltersToApply] = useState([]);
+  const [filtersApplied, setFiltersApplied] = useState([]);
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
 
   // close on click outside
   useEffect(() => {
@@ -31,6 +38,39 @@ function DropdownFilter({
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
+
+  const handleCheckboxChange = (event) => {
+    const value = event.target.value;
+    const isChecked = event.target.checked;
+    
+    setFiltersApplied(prevState => ({
+      ...prevState,
+      [value]: isChecked
+    }));
+    if (event.target.checked) {
+      setFiltersToApply([...filtersToApply, value]);
+    } else {
+      setFiltersToApply(filtersToApply.filter(filter => filter !== value));
+    }
+  };
+
+  const handleFilters = (event) => {
+    event.preventDefault();
+    searchParams.delete('page');
+    searchParams.set('filters', filtersToApply);
+    navigate(`/products?${searchParams.toString()}`);
+  }
+
+  const handleClear = (event) => {
+      event.preventDefault();
+      setDropdownOpen(false);
+      setFiltersToApply([]);
+      setFiltersApplied({});
+
+      let newSearchParams = searchParams.delete('filters');
+      (searchParams.length) ? navigate(`/products?${newSearchParams.toString()}`) : navigate(`/products`);
+  }
+
 
   return (
     <div className="relative inline-flex">
@@ -59,31 +99,49 @@ function DropdownFilter({
       >
         <div ref={dropdown}>
           <div className="text-xs font-semibold text-slate-400 uppercase pt-1.5 pb-2 px-4">Filters</div>
-          <ul className="mb-4">
-            {
-              
-              [...new Set(list.map(listEl => listEl.tax))].map(el => {
-                return (
-                  <li className="py-1 px-3">
-                    <label className="flex items-center">
-                      <input type="checkbox" className="form-checkbox" />
+          
+          <form onSubmit={handleFilters}>
+            <ul className="mb-4">
+              {
+                
+                filters.map(el => {
+                  return (
+                    <li key={el} className="py-1 px-3">
+                      <input
+                        type="checkbox"
+                        className="form-checkbox"
+                        value={el}
+                        checked={filtersApplied[el] || false}
+                        onChange={handleCheckboxChange}/>
                       <span className="text-sm font-medium ml-2">{el}</span>
-                    </label>
-                  </li>
-                )
-              })
-            }
-          </ul>
-          <div className="py-2 px-3 border-t border-slate-200 bg-slate-50">
-            <ul className="flex items-center justify-between">
-              <li>
-                <button className="btn-xs bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600">Clear</button>
-              </li>
-              <li>
-                <button className="btn-xs bg-blue-500 hover:bg-blue-600 text-white" onClick={() => setDropdownOpen(false)} onBlur={() => setDropdownOpen(false)}>Apply</button>
-              </li>
+                    </li>
+                  )
+                })
+              }
             </ul>
-          </div>
+            <div className="py-2 px-3 border-t border-slate-200 bg-slate-50">
+              <ul className="flex items-center justify-between">
+                <li>
+                  <button
+                    className="btn-xs bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600"
+                    onClick={handleClear}
+                  >
+                    Clear
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="submit"
+                    className="btn-xs bg-blue-500 hover:bg-blue-600 text-white"
+                    onClick={() => setDropdownOpen(false)}
+                    onBlur={() => setDropdownOpen(false)}
+                  >
+                    Apply
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </form>
         </div>
       </Transition>
     </div>

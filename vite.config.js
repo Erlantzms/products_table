@@ -25,5 +25,10 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     }
-  } 
+  },
+  server: {
+    proxy: {
+      '/': 'http://productstable-production.up.railway.app'
+    }
+  },
 })

@@ -3,9 +3,10 @@
     "table_title": "Listado de productos ",
     "table_header": {
         "id": "Id",
-        "product": "Producto",
+        "title": "Producto",
         "price": "Precio",
-        "stock": "Stock"
+        "stock": "Stock",
+        "tax": "Impuesto"
     },
     "input_placeholder": "Búsqueda por producto...",
     "filters": {
@@ -21,5 +22,9 @@
         "general": "General",
         "reduced": "Reducido",
         "s_reduced": "Super reducido"
+    },
+    "translation": {
+        "es": "ES",
+        "en": "IN"
     }
 }

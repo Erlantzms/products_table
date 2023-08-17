@@ -2,7 +2,6 @@ import React from "react";
 import { render } from "@testing-library/react";
 import ProductsTableItem from "./ProductsTableItem";
 import '@testing-library/jest-dom'
-import { screen } from "@testing-library/dom";
 
 let mockProduct = {
   "id": "1",
@@ -38,6 +37,6 @@ test('renders the product tax in the correct format', () => {
     stock={mockProduct.stock}
     tax={mockProduct.tax}/>
   );
-  
+
   expect(getByText('21%')).toBeInTheDocument();
 })

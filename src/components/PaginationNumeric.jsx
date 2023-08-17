@@ -46,11 +46,11 @@ function PaginationNumeric({pagination}) {
   for (let i = 1; i <= pagination?.totalPages; i++) {
     numberOfPages.push(
       <li key={i}> 
-        <span
+        <button
           className={`${paginationColors(i)} inline-flex items-center justify-center rounded leading-5 px-3.5 py-2 mx-0.5 border border-slate-200 cursor-pointer hover:bg-blue-500 border border-slate-200 text-slate-600 hover:text-white shadow-sm`}
           onClick={() => handlePage(i)}>
           {i}
-        </span>
+        </button>
       </li>
     );
   }

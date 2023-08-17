@@ -45,10 +45,8 @@ function ProductsTable({list, pagination, isLoading}) {
         <h2 className="font-semibold text-slate-800">{t("products")} <span className="text-slate-400 font-medium">{pagination.totalResults}</span></h2>
       </header>
       <div>
-        {/* Table */}
         <div className="overflow-x-auto">
           <table className="table-auto w-full">
-            {/* Table header */}
             <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
               <tr>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
@@ -83,8 +81,6 @@ function ProductsTable({list, pagination, isLoading}) {
                 </th>
               </tr>
             </thead>
-            {/* Table body */}
-            <tbody className="text-sm divide-y divide-slate-200">
               {!isLoading ?
                 list.map(product => {
                   return (
@@ -104,7 +100,6 @@ function ProductsTable({list, pagination, isLoading}) {
                 </td>
               </tr>
               }
-            </tbody>
           </table>
 
         </div>

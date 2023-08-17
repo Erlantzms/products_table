@@ -30,23 +30,25 @@ function ProductsTableItem(props) {
 
 
   return (
-    <tr className='hover:bg-slate-100'>
-      <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div className="font-medium text-sky-500">{props.id}</div>
-      </td>
-      <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div className={`font-medium text-slate-500`}>{props.title}</div>
-      </td>
-      <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div className="font-medium text-slate-800">{props.price}</div>
-      </td>
-      <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <span className={`font-medium px-2 py-1 ${warningStock(props.stock)} flex w-8 justify-center rounded-lg`}>{(props.stock)}</span>
-      </td>
-      <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <span className={`font-medium px-2 py-1 rounded-full`}>{`${defineTax(props.tax)}%`}</span>
-      </td>
-    </tr>
+    <tbody className="text-sm divide-y divide-slate-200">
+      <tr className='hover:bg-slate-100'>
+        <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+          <div className="font-medium text-sky-500">{props.id}</div>
+        </td>
+        <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+          <div className={`font-medium text-slate-500`}>{props.title}</div>
+        </td>
+        <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+          <div className="font-medium text-slate-800">{props.price}</div>
+        </td>
+        <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+          <span className={`font-medium px-2 py-1 ${warningStock(props.stock)} flex w-8 justify-center rounded-lg`}>{(props.stock)}</span>
+        </td>
+        <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+          <span className={`font-medium px-2 py-1 rounded-full`}>{`${defineTax(props.tax)}%`}</span>
+        </td>
+      </tr>
+    </tbody>
   );
 }
 

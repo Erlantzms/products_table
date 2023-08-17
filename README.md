@@ -9,7 +9,12 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run dev
+npm run dev OR npm start
+```
+
+### Run tests
+```
+npm run test
 ```
 
 ### Customize configuration

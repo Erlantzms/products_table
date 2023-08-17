@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-function SearchForm() {
-  const [searchValue, setSearchValue] = useState('');
+function SearchForm({searchValue, setSearchValue}) {
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,7 +15,6 @@ function SearchForm() {
     searchParams.delete('page');
     searchParams.set('title', searchValue);
     navigate(`/products?${searchParams.toString()}`);
-    setSearchValue('');
   } 
   return (
     <form className="relative" onSubmit={searchByParam}>

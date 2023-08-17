@@ -39,6 +39,8 @@ function ProductsTable({list, pagination, isLoading}) {
     navigate(`/products?${searchParams.toString()}`);
   };
 
+  const headersTitles = ["id", "title", "price", "stock", "tax"]
+
   return (
     <div className="bg-white shadow-lg rounded-sm border border-slate-200 relative">
       <header className="px-5 py-4">
@@ -49,36 +51,14 @@ function ProductsTable({list, pagination, isLoading}) {
           <table className="table-auto w-full">
             <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
               <tr>
-                <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
-                  <div id="id" onClick={() => handleOrder('id')} className="flex items-center">
-                    <span className="font-semibold text-left">{t("table_header.id")}</span>
-                    {renderArrows('id')}
+                {headersTitles.map(tit => (
+                  <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
+                  <div id={tit} onClick={() => handleOrder(tit)} className="flex items-center">
+                    <span className="font-semibold text-left">{t(`table_header.${tit}`)}</span>
+                    {renderArrows(tit)}
                   </div>
                 </th>
-                <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
-                  <div className="flex items-center" id="title" onClick={() => handleOrder('title')}>
-                    <span className="font-semibold text-left">{t("table_header.product")}</span>
-                    {renderArrows('title')}
-                  </div>
-                </th>
-                <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
-                  <div className="flex items-center" id="price" onClick={() => handleOrder('price')}>
-                    <span className="font-semibold text-left">{t("table_header.price")}</span>
-                    {renderArrows('price')}
-                </div>
-                </th>
-                <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
-                  <div className="flex items-center" id="stock" onClick={() => handleOrder('stock')}>
-                    <span className="font-semibold text-left">{t("table_header.stock")}</span>
-                    {renderArrows('stock')}
-                </div>
-                </th>
-                <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap cursor-pointer">
-                  <div className="flex items-center" id="tax" onClick={() => handleOrder('tax')}>
-                    <span className="font-semibold text-left">Impuesto</span>
-                    {renderArrows('tax')}
-                  </div>
-                </th>
+                ))}
               </tr>
             </thead>
             <tbody>

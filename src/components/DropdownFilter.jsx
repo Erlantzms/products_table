@@ -3,9 +3,7 @@ import Transition from '../utils/Transition';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'
 
-function DropdownFilter({
-  align
-}) {
+function DropdownFilter({align, setSearchValue}) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const filters = ["es_general_21", "es_reduced_10", "es_super-reduced_4", "fr_general_20", "fr_reduced_5.5"]
@@ -70,6 +68,7 @@ function DropdownFilter({
       setDropdownOpen(false);
       setFiltersToApply([]);
       setFiltersApplied({});
+      setSearchValue('');
 
       let newSearchParams = searchParams.delete('filters');
       (searchParams.length) ? navigate(`/products?${newSearchParams.toString()}`) : navigate(`/products`);

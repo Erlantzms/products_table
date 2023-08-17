@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 function Products({list, pagination, isLoading}) {
   const {t} = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [searchValue, setSearchValue] = useState('');
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -39,9 +39,9 @@ function Products({list, pagination, isLoading}) {
               {/* Right: Actions */}
               <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
                 {/* Search form */}
-                <SearchForm/>
+                <SearchForm searchValue={searchValue} setSearchValue={setSearchValue}/>
                 {/* Filter button */}
-                <FilterButton align="right" list={list} />
+                <FilterButton align="right" list={list} setSearchValue={setSearchValue}/>
               </div>
 
             </div>

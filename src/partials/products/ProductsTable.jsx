@@ -81,25 +81,26 @@ function ProductsTable({list, pagination, isLoading}) {
                 </th>
               </tr>
             </thead>
-              {!isLoading ?
-                list.map(product => {
-                  return (
-                    <Products
-                      key={product.id}
-                      id={product.id}
-                      title={product.title}
-                      price={product.price}
-                      stock={product.stock}
-                      tax={product.tax}
-                    />
-                  )
-                }) :
-              <tr >
-                <td colSpan="5" className='text-center'>
-                  <Loader/>
-                </td>
-              </tr>
-              }
+            <tbody>
+              {!isLoading ? (
+                list.map((product, index) => (
+                  <Products
+                    key={index}
+                    id={product.id}
+                    title={product.title}
+                    price={product.price}
+                    stock={product.stock}
+                    tax={product.tax}
+                  />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    <Loader />
+                  </td>
+                </tr>
+              )}
+            </tbody>
           </table>
 
         </div>

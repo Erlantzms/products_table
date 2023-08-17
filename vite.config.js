@@ -29,6 +29,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/': 'http://productstable-production.up.railway.app'
-    }
+    },
+    host: true 
   },
 })
